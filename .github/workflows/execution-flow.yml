@@ -36,8 +36,8 @@ jobs:
         id: run-tests
         run: npm run test
       - name: Upload test report
-      # Runs only when run-tests results into failure
-        if: steps.run-tests.outcome == 'failue'
+      # Runs only when run-tests results into failure and failure() allows it to run even if the previous or step has failed.
+        if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v4
         with:
           name: test-report
